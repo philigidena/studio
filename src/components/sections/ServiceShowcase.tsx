@@ -99,7 +99,7 @@ const ServiceShowcase = () => {
           }}
           plugins={[
             Autoplay({
-              delay: 4000,
+              delay: 3000, // Changed from 4000ms to 3000ms for a faster pace
               stopOnInteraction: true,
               stopOnMouseEnter: true,
             })
@@ -120,8 +120,8 @@ const ServiceShowcase = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex left-1 md:left-2 bg-background/70 hover:bg-background border-border text-foreground" />
-          <CarouselNext className="hidden sm:flex right-1 md:right-2 bg-background/70 hover:bg-background border-border text-foreground" />
+          <CarouselPrevious className="hidden sm:flex left-1 md:left-2 bg-card/70 hover:bg-card border-border text-foreground" />
+          <CarouselNext className="hidden sm:flex right-1 md:right-2 bg-card/70 hover:bg-card border-border text-foreground" />
         </Carousel>
       </div>
     </section>

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%; /* Brighter, almost white */
+    --background: 356 62% 89%; /* Light Desaturated Red - #F4D2D4 */
     --foreground: 220 15% 25%; /* Dark cool gray for text */
     
     --card: 0 0% 100%; /* White */
@@ -13,42 +13,43 @@
     --popover: 0 0% 100%; /* White */
     --popover-foreground: 220 15% 25%; /* Dark cool gray for popover text */
     
-    --primary: 170 70% 45%; /* Vibrant Teal */
+    --primary: 356 78% 56%; /* Saturated Red - #E63946 */
     --primary-foreground: 0 0% 100%; /* White */
     
-    --secondary: 170 70% 90%; /* Very Light Teal */
-    --secondary-foreground: 170 70% 25%; /* Darker Teal for text */
+    --secondary: 356 78% 85%; /* Lighter, less saturated red */
+    --secondary-foreground: 356 78% 30%; /* Darker red for text on secondary */
     
-    --muted: 210 30% 94%; /* Very light gray-blue */
-    --muted-foreground: 210 25% 55%; /* Medium gray-blue text */
+    --muted: 356 30% 94%; /* Very light desaturated red / pinkish gray */
+    --muted-foreground: 220 15% 45%; /* Medium cool gray text for muted */
     
-    --accent: 25 95% 55%; /* Vibrant Orange */
+    --accent: 27 87% 67%; /* Vibrant Orange - #F4A261 */
     --accent-foreground: 0 0% 100%; /* White */
     
-    --destructive: 0 70% 50%; /* Standard red */
+    --destructive: 0 84% 60%; /* A more distinct, brighter red for errors */
     --destructive-foreground: 0 0% 98%; /* Almost white for text on destructive */
     
-    --border: 210 20% 88%; /* Light gray-blue border */
-    --input: 0 0% 100%; /* White for input fields */
-    --ring: 170 70% 45%; /* Vibrant Teal for rings */
+    --border: 356 30% 80%; /* Desaturated red border */
+    --input: 0 0% 100%; /* White for input fields, assuming they are on card or darker bg */
+    --ring: 356 78% 56%; /* Saturated Red for rings (matches primary) */
 
     --radius: 0.5rem;
 
-    --chart-1: 170 70% 40%;
-    --chart-2: 170 70% 60%;
-    --chart-3: 25 95% 50%;
-    --chart-4: 25 95% 70%;
-    --chart-5: 180 50% 60%; /* Adjusted for teal theme */
+    /* Chart colors adjusted for the new red/orange theme */
+    --chart-1: 356 78% 50%; /* Deep Red */
+    --chart-2: 356 78% 70%; /* Lighter Red */
+    --chart-3: 27 87% 60%;  /* Orange */
+    --chart-4: 27 87% 80%;  /* Lighter Orange */
+    --chart-5: 0 50% 60%;   /* A neutral contrasting color, e.g., a salmon pink or gray */
 
-    /* Sidebar colors adjusted for the new vibrant theme */
-    --sidebar-background: 220 20% 18%; /* Darker cool gray for sidebar bg */
+    /* Sidebar colors adjusted for the new theme */
+    --sidebar-background: 220 15% 18%; /* Dark cool gray for sidebar bg (keeps good contrast) */
     --sidebar-foreground: 0 0% 90%; /* Light text for dark sidebar */
-    --sidebar-primary: 170 70% 50%; /* Vibrant Teal */
+    --sidebar-primary: 356 78% 60%; /* Saturated Red (matches app primary) */
     --sidebar-primary-foreground: 0 0% 100%; /* white */
-    --sidebar-accent: 25 95% 55%; /* Vibrant orange for accents */
+    --sidebar-accent: 27 87% 67%; /* Orange (matches app accent) */
     --sidebar-accent-foreground: 0 0% 100%; /* white */
     --sidebar-border: 220 15% 30%; /* border for dark sidebar */
-    --sidebar-ring: 170 70% 50%; /* Vibrant Teal for rings */
+    --sidebar-ring: 356 78% 60%; /* Saturated Red for rings */
   }
 
   .dark {
@@ -61,33 +62,33 @@
     --popover: 220 15% 15%; /* Dark popover background */
     --popover-foreground: 210 30% 90%; /* Light gray-blue text */
 
-    --primary: 170 70% 55%; /* Slightly lighter vibrant Teal for dark mode */
-    --primary-foreground: 170 10% 10%; /* Very dark text on primary */
+    --primary: 356 78% 65%; /* Slightly lighter Saturated Red for dark mode */
+    --primary-foreground: 0 0% 10%; /* Very dark text on primary */
 
-    --secondary: 170 70% 25%; /* Darker shade of vibrant Teal for dark mode */
-    --secondary-foreground: 170 70% 85%; /* Light shade of vibrant Teal text */
+    --secondary: 356 78% 30%; /* Darker shade of Saturated Red for dark mode */
+    --secondary-foreground: 356 78% 80%; /* Light shade of Saturated Red text */
 
     --muted: 220 15% 20%; /* Dark muted */
     --muted-foreground: 210 25% 65%; /* Lighter muted text */
 
-    --accent: 25 95% 65%; /* Slightly lighter vibrant orange for dark mode accent */
-    --accent-foreground: 220 10% 10%; /* Dark text on accent */
+    --accent: 27 87% 70%; /* Slightly lighter vibrant orange for dark mode accent */
+    --accent-foreground: 27 80% 15%; /* Dark text on accent */
 
-    --destructive: 0 60% 45%; /* Slightly darker red for dark mode */
+    --destructive: 0 70% 55%; /* Slightly darker red for dark mode destructive */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 15% 25%; /* Dark border */
+    --border: 220 15% 25%; /* Dark border */
     --input: 220 15% 20%; /* Dark input background */
-    --ring: 170 70% 55%; /* Primary color for rings in dark mode */
+    --ring: 356 78% 65%; /* Primary color for rings in dark mode */
     
     --sidebar-background: 220 15% 8%;   /* Even darker for sidebar in dark mode */
     --sidebar-foreground: 0 0% 92%; 
-    --sidebar-primary: 170 70% 55%; 
-    --sidebar-primary-foreground: 170 10% 8%;
-    --sidebar-accent: 25 95% 60%; 
-    --sidebar-accent-foreground: 220 10% 8%;
+    --sidebar-primary: 356 78% 65%; 
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 27 87% 70%; 
+    --sidebar-accent-foreground: 27 80% 10%;
     --sidebar-border: 220 10% 22%; 
-    --sidebar-ring: 170 70% 55%;
+    --sidebar-ring: 356 78% 65%;
   }
 }
 
