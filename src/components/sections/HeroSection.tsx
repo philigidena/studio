@@ -34,14 +34,14 @@ const HeroSection = () => {
     <section ref={sectionRef} className="relative text-primary-foreground py-20 md:py-32 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://ekookna.co.uk/file/uploads/aktualnosci_2000_corredera.jpg" 
-          alt="Modern aluminum sliding window and frame cross-section"
+          src="https://ekookna.co.uk/file/uploads/aktualnosci_2000_corredera.jpg"
+          alt="Modern aluminum architectural installation"
           layout="fill"
           objectFit="cover"
-          className="opacity-40"
+          className="opacity-60" 
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 opacity-80"></div>
       </div>
       
       <div className="container mx-auto px-6 md:px-10 text-center relative z-10">
