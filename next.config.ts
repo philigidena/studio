@@ -57,6 +57,18 @@ const nextConfig: NextConfig = {
         hostname: 'innovativeofficepartitions.com.au',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'image.made-in-china.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.pfgglass.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
