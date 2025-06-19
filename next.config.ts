@@ -69,6 +69,24 @@ const nextConfig: NextConfig = {
         hostname: 'www.pfgglass.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'globalsolariums.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'konig.vn',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
