@@ -13,11 +13,11 @@
     --popover: 0 0% 100%; /* White */
     --popover-foreground: 220 15% 25%; /* Dark cool gray for popover text */
     
-    --primary: 210 70% 50%; /* Vibrant Blue */
+    --primary: 170 70% 45%; /* Vibrant Teal */
     --primary-foreground: 0 0% 100%; /* White */
     
-    --secondary: 210 70% 90%; /* Very Light Vibrant Blue */
-    --secondary-foreground: 210 70% 30%; /* Darker Vibrant Blue for text */
+    --secondary: 170 70% 90%; /* Very Light Teal */
+    --secondary-foreground: 170 70% 25%; /* Darker Teal for text */
     
     --muted: 210 30% 94%; /* Very light gray-blue */
     --muted-foreground: 210 25% 55%; /* Medium gray-blue text */
@@ -30,25 +30,25 @@
     
     --border: 210 20% 88%; /* Light gray-blue border */
     --input: 0 0% 100%; /* White for input fields */
-    --ring: 210 70% 50%; /* Vibrant Blue for rings */
+    --ring: 170 70% 45%; /* Vibrant Teal for rings */
 
     --radius: 0.5rem;
 
-    --chart-1: 210 70% 45%;
-    --chart-2: 210 70% 65%;
+    --chart-1: 170 70% 40%;
+    --chart-2: 170 70% 60%;
     --chart-3: 25 95% 50%;
     --chart-4: 25 95% 70%;
-    --chart-5: 200 50% 60%;
+    --chart-5: 180 50% 60%; /* Adjusted for teal theme */
 
     /* Sidebar colors adjusted for the new vibrant theme */
     --sidebar-background: 220 20% 18%; /* Darker cool gray for sidebar bg */
     --sidebar-foreground: 0 0% 90%; /* Light text for dark sidebar */
-    --sidebar-primary: 210 70% 55%; /* Vibrant blue */
+    --sidebar-primary: 170 70% 50%; /* Vibrant Teal */
     --sidebar-primary-foreground: 0 0% 100%; /* white */
     --sidebar-accent: 25 95% 55%; /* Vibrant orange for accents */
     --sidebar-accent-foreground: 0 0% 100%; /* white */
     --sidebar-border: 220 15% 30%; /* border for dark sidebar */
-    --sidebar-ring: 210 70% 55%; /* Vibrant blue for rings */
+    --sidebar-ring: 170 70% 50%; /* Vibrant Teal for rings */
   }
 
   .dark {
@@ -61,11 +61,11 @@
     --popover: 220 15% 15%; /* Dark popover background */
     --popover-foreground: 210 30% 90%; /* Light gray-blue text */
 
-    --primary: 210 70% 60%; /* Slightly lighter vibrant blue for dark mode */
-    --primary-foreground: 220 10% 10%; /* Very dark text on primary */
+    --primary: 170 70% 55%; /* Slightly lighter vibrant Teal for dark mode */
+    --primary-foreground: 170 10% 10%; /* Very dark text on primary */
 
-    --secondary: 210 70% 25%; /* Darker shade of vibrant blue for dark mode */
-    --secondary-foreground: 210 70% 85%; /* Light shade of vibrant blue text */
+    --secondary: 170 70% 25%; /* Darker shade of vibrant Teal for dark mode */
+    --secondary-foreground: 170 70% 85%; /* Light shade of vibrant Teal text */
 
     --muted: 220 15% 20%; /* Dark muted */
     --muted-foreground: 210 25% 65%; /* Lighter muted text */
@@ -78,16 +78,16 @@
 
     --border: 210 15% 25%; /* Dark border */
     --input: 220 15% 20%; /* Dark input background */
-    --ring: 210 70% 60%; /* Primary color for rings in dark mode */
+    --ring: 170 70% 55%; /* Primary color for rings in dark mode */
     
     --sidebar-background: 220 15% 8%;   /* Even darker for sidebar in dark mode */
     --sidebar-foreground: 0 0% 92%; 
-    --sidebar-primary: 210 70% 60%; 
-    --sidebar-primary-foreground: 220 10% 8%;
+    --sidebar-primary: 170 70% 55%; 
+    --sidebar-primary-foreground: 170 10% 8%;
     --sidebar-accent: 25 95% 60%; 
     --sidebar-accent-foreground: 220 10% 8%;
     --sidebar-border: 220 10% 22%; 
-    --sidebar-ring: 210 70% 60%;
+    --sidebar-ring: 170 70% 55%;
   }
 }
 
