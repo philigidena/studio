@@ -1,14 +1,15 @@
 
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import ServiceCard from '../shared/ServiceCard';
 import { SectionTitle } from '../shared/SectionTitle';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 const services = [
   {
@@ -84,47 +85,36 @@ const services = [
 ];
 
 const ServiceShowcase = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const cards = cardsContainerRef.current?.children;
-    if (cards) {
-      gsap.fromTo(cards,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: cardsContainerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          }
-        }
-      );
-    }
-  }, []);
-
   return (
-    <section id="services" ref={sectionRef} className="py-16 md:py-24 bg-background">
+    <section id="services" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6 md:px-10">
         <SectionTitle subtitle="Explore our wide range of aluminum solutions designed for durability, style, and performance.">
           Our Services
         </SectionTitle>
-        <div ref={cardsContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.id}
-              serviceName={service.serviceName}
-              imageUrl={service.imageUrl}
-              description={service.description}
-              imageHint={service.imageHint}
-            />
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
+        >
+          <CarouselContent className="-ml-4">
+            {services.map((service) => (
+              <CarouselItem key={service.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="p-1 h-full">
+                  <ServiceCard
+                    serviceName={service.serviceName}
+                    imageUrl={service.imageUrl}
+                    description={service.description}
+                    imageHint={service.imageHint}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
       </div>
     </section>
   );
