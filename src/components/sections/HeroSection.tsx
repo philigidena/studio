@@ -1,3 +1,4 @@
+
 "use client";
 import { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
@@ -33,15 +34,14 @@ const HeroSection = () => {
     <section ref={sectionRef} className="relative text-primary-foreground py-20 md:py-32 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://placehold.co/1920x1080.png" 
-          alt="Abstract metallic background"
+          src="https://storage.googleapis.com/fab_ai_dev_images/97ef5390-596a-440b-9f4d-ed2ff95c079f.png" 
+          alt="Modern aluminum sliding window and frame cross-section"
           layout="fill"
           objectFit="cover"
-          className="opacity-10"
-          data-ai-hint="abstract metallic shapes"
+          className="opacity-40"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 opacity-95"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 opacity-90"></div>
       </div>
       
       <div className="container mx-auto px-6 md:px-10 text-center relative z-10">
