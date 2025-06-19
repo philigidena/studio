@@ -88,7 +88,7 @@ const services = [
 const ServiceShowcase = () => {
   return (
     <section id="services" className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-6 md:px-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
         <SectionTitle subtitle="Discover Nanchang's comprehensive suite of aluminum products, expertly crafted for superior durability, modern aesthetics, and unmatched performance. From elegant windows and doors to robust curtain walls and bespoke sunrooms, we have the perfect solution for your project.">
           Our Services
         </SectionTitle>
@@ -106,9 +106,9 @@ const ServiceShowcase = () => {
           ]}
           className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-2 sm:-ml-4">
             {services.map((service) => (
-              <CarouselItem key={service.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={service.id} className="pl-2 sm:pl-4 md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
                   <ServiceCard
                     serviceName={service.serviceName}
@@ -120,8 +120,8 @@ const ServiceShowcase = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex left-1 md:left-2 bg-card/70 hover:bg-card border-border text-foreground" />
-          <CarouselNext className="hidden sm:flex right-1 md:right-2 bg-card/70 hover:bg-card border-border text-foreground" />
+          <CarouselPrevious className="hidden sm:flex left-[-8px] sm:left-[-12px] md:left-[-16px] bg-card/70 hover:bg-card border-border text-foreground" />
+          <CarouselNext className="hidden sm:flex right-[-8px] sm:right-[-12px] md:right-[-16px] bg-card/70 hover:bg-card border-border text-foreground" />
         </Carousel>
       </div>
     </section>

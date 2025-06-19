@@ -42,7 +42,7 @@ const AiRecommendationSection = () => {
             trigger: currentCardRef,
             start: "top 85%",
             toggleActions: "play none none none",
-            onEnter: () => { // Animate inner elements when card is visible
+            onEnter: () => { 
               if (currentTextareaRef) {
                 gsap.fromTo(currentTextareaRef,
                   { opacity: 0, x: -30 },
@@ -65,14 +65,13 @@ const AiRecommendationSection = () => {
   useEffect(() => {
     const currentResultRef = resultRef.current;
     if (recommendation && currentResultRef && cardRef.current) {
-      // Ensure this animation plays when the recommendation appears
       gsap.fromTo(currentResultRef,
         { opacity: 0, y: 20 },
         { 
           opacity: 1, 
           y: 0, 
           duration: 0.7, 
-          delay: 0.1, // Slight delay after state update
+          delay: 0.1, 
           ease: 'power3.out' 
         }
       );
@@ -121,13 +120,13 @@ const AiRecommendationSection = () => {
 
   return (
     <section id="ai-recommendation" ref={sectionRef} className="py-16 md:py-24 bg-secondary/30">
-      <div className="container mx-auto px-6 md:px-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
         <SectionTitle subtitle="Not sure which service is right for you? Describe your project or needs, and our AI assistant will suggest the best Nanchang service.">
           AI Service Helper
         </SectionTitle>
         <Card ref={cardRef} className="max-w-2xl mx-auto shadow-xl bg-card rounded-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary text-2xl font-headline">
+            <CardTitle className="flex items-center gap-2 text-primary text-xl sm:text-2xl font-headline">
               <Wand2 size={26} />
               Describe Your Needs
             </CardTitle>
@@ -142,10 +141,10 @@ const AiRecommendationSection = () => {
               value={needsDescription}
               onChange={(e) => setNeedsDescription(e.target.value)}
               rows={5}
-              className="bg-input focus:bg-input/80 text-base"
+              className="bg-input focus:bg-input/80 text-sm sm:text-base"
               aria-label="Describe your aluminum needs"
             />
-            <Button ref={buttonRef} onClick={handleRecommend} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-semibold">
+            <Button ref={buttonRef} onClick={handleRecommend} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-sm sm:text-base font-semibold">
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -158,11 +157,11 @@ const AiRecommendationSection = () => {
           </CardContent>
           
           {recommendation && (
-            <CardFooter ref={resultRef} className="flex flex-col items-start gap-4 p-6 border-t border-border mt-4">
-              <h3 className="text-xl font-headline font-semibold text-primary">AI Recommendation:</h3>
-              <div className="bg-primary/10 p-4 rounded-md w-full">
-                <p className="font-bold text-lg text-primary mb-1">{recommendation.recommendedService}</p>
-                <p className="text-sm text-foreground">{recommendation.reasoning}</p>
+            <CardFooter ref={resultRef} className="flex flex-col items-start gap-4 p-4 sm:p-6 border-t border-border mt-4">
+              <h3 className="text-lg sm:text-xl font-headline font-semibold text-primary">AI Recommendation:</h3>
+              <div className="bg-primary/10 p-3 sm:p-4 rounded-md w-full">
+                <p className="font-bold text-md sm:text-lg text-primary mb-1">{recommendation.recommendedService}</p>
+                <p className="text-xs sm:text-sm text-foreground">{recommendation.reasoning}</p>
               </div>
             </CardFooter>
           )}

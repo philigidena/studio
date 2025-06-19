@@ -61,18 +61,18 @@ const ProjectPortfolio = () => {
 
   useEffect(() => {
     const cards = cardsContainerRef.current?.children;
-    if (cards && cards.length > 0) { // Ensure cards exist
+    if (cards && cards.length > 0) { 
       gsap.fromTo(cards,
         { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6, // Slightly longer duration for smoother feel
-          stagger: 0.15, // Adjusted stagger
+          duration: 0.6, 
+          stagger: 0.15, 
           ease: 'power3.out',
           scrollTrigger: {
             trigger: cardsContainerRef.current,
-            start: "top 85%", // Trigger when 85% of the container is visible
+            start: "top 85%", 
             toggleActions: "play none none none",
           }
         }
@@ -82,11 +82,11 @@ const ProjectPortfolio = () => {
 
   return (
     <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-secondary/20">
-      <div className="container mx-auto px-6 md:px-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
         <SectionTitle subtitle="Witness our dedication to excellence. Explore a curated selection of Nanchang's completed projects, demonstrating our mastery in aluminum fabrication, meticulous installation, and innovative design solutions across diverse commercial and residential applications.">
           Our Portfolio
         </SectionTitle>
-        <div ref={cardsContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={cardsContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project) => (
             <ProjectCard
               key={project.id}

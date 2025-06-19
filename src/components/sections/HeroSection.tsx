@@ -95,11 +95,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-slate-800 text-primary-foreground py-20 md:py-28 overflow-hidden relative">
+    <section ref={sectionRef} className="bg-slate-800 text-primary-foreground py-16 md:py-20 lg:py-28 overflow-hidden relative">
       <div className="absolute inset-0 z-0">
         <Image
           src="https://www.pfgglass.com/wp-content/uploads/2020/08/19951-80a-Street-Langley-Carsten-Arnold-Photography-44-1024x684.jpg"
-          alt="Faint background image"
+          alt="Faint background image of modern architecture"
           layout="fill"
           objectFit="cover"
           className="opacity-10"
@@ -107,7 +107,7 @@ const HeroSection = () => {
           priority
         />
       </div>
-      <div className="container mx-auto px-6 md:px-10 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div ref={svgContainerRef} className="w-full max-w-md mx-auto md:mx-0 md:order-1 cursor-pointer">
             <svg 
@@ -161,13 +161,13 @@ const HeroSection = () => {
           </div>
 
           <div className="text-center md:text-left md:order-2">
-            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl font-headline font-extrabold mb-4 text-primary">
+            <h1 ref={headingRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold mb-4 text-primary">
               Nanchang Ethiopia
             </h1>
-            <p ref={p1Ref} className="text-xl md:text-2xl mb-3 font-semibold text-primary-foreground/90">
+            <p ref={p1Ref} className="text-lg md:text-xl lg:text-2xl mb-3 font-semibold text-primary-foreground/90">
               Premier Aluminum Solutions
             </p>
-            <p ref={p2Ref} className="text-md sm:text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 text-primary-foreground/80">
+            <p ref={p2Ref} className="text-base sm:text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 text-primary-foreground/80">
               Delivering top-quality aluminum windows, doors, curtain walls, and custom fabrications across Ethiopia.
               Innovative designs, durable materials, and expert craftsmanship for your projects.
             </p>
