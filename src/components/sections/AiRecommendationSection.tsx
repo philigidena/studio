@@ -1,20 +1,44 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, AlertTriangle } from 'lucide-react';
+import { Loader2, Wand2 } from 'lucide-react';
 import { recommendService, type RecommendServiceInput, type RecommendServiceOutput } from '@/ai/flows/service-recommendation';
 import { SectionTitle } from '../shared/SectionTitle';
 import { useToast } from "@/hooks/use-toast";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const AiRecommendationSection = () => {
   const [needsDescription, setNeedsDescription] = useState('');
   const [recommendation, setRecommendation] = useState<RecommendServiceOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const currentCardRef = cardRef.current;
+    if (currentCardRef) {
+      gsap.fromTo(currentCardRef,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: currentCardRef,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          }
+        }
+      );
+    }
+  }, []);
+
 
   const handleRecommend = async () => {
     if (!needsDescription.trim()) {
@@ -27,7 +51,7 @@ const AiRecommendationSection = () => {
     }
     
     setIsLoading(true);
-    setRecommendation(null); // Clear previous recommendation
+    setRecommendation(null);
 
     try {
       const input: RecommendServiceInput = { needsDescription };
@@ -49,7 +73,7 @@ const AiRecommendationSection = () => {
         description: errorMessage,
         variant: "destructive",
       });
-      setRecommendation(null); // Ensure recommendation is cleared on error
+      setRecommendation(null);
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +85,7 @@ const AiRecommendationSection = () => {
         <SectionTitle subtitle="Not sure which service is right for you? Describe your project or needs, and our AI assistant will suggest the best Nanchang service.">
           AI Service Helper
         </SectionTitle>
-        <Card className="max-w-2xl mx-auto shadow-xl bg-card rounded-lg">
+        <Card ref={cardRef} className="max-w-2xl mx-auto shadow-xl bg-card rounded-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-primary text-2xl font-headline">
               <Wand2 size={26} />
@@ -77,7 +101,7 @@ const AiRecommendationSection = () => {
               value={needsDescription}
               onChange={(e) => setNeedsDescription(e.target.value)}
               rows={5}
-              className="bg-background/80 focus:bg-background text-base"
+              className="bg-input focus:bg-input/80 text-base"
               aria-label="Describe your aluminum needs"
             />
             <Button onClick={handleRecommend} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-semibold">

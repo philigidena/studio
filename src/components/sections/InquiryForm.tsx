@@ -28,17 +28,9 @@ const formSchema = z.object({
 
 type InquiryFormValues = z.infer<typeof formSchema>;
 
-// Mock server action
 async function submitInquiryAction(data: InquiryFormValues): Promise<{ success: boolean; message: string }> {
   console.log("Server Action: Submitting inquiry...", data);
-  // Simulate API call
   await new Promise(resolve => setTimeout(resolve, 1500));
-  // Simulate success/failure
-  // if (Math.random() > 0.5) {
-  //   return { success: true, message: "Your inquiry has been submitted successfully! We'll get back to you soon." };
-  // } else {
-  //   return { success: false, message: "Submission failed. Please try again later." };
-  // }
   return { success: true, message: "Your inquiry has been submitted successfully! We'll get back to you soon." };
 }
 
@@ -96,7 +88,7 @@ export function InquiryForm() {
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Abebe Kebede" {...field} className="bg-background/80 focus:bg-background" />
+                <Input placeholder="e.g. Abebe Kebede" {...field} className="bg-input focus:bg-input/80" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -109,7 +101,7 @@ export function InquiryForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="e.g. abebe@example.com" {...field} className="bg-background/80 focus:bg-background" />
+                <Input type="email" placeholder="e.g. abebe@example.com" {...field} className="bg-input focus:bg-input/80" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -122,7 +114,7 @@ export function InquiryForm() {
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Quotation for Aluminum Windows" {...field} className="bg-background/80 focus:bg-background" />
+                <Input placeholder="e.g. Quotation for Aluminum Windows" {...field} className="bg-input focus:bg-input/80" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,7 +127,7 @@ export function InquiryForm() {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Please provide details about your project or inquiry..." {...field} rows={5} className="bg-background/80 focus:bg-background" />
+                <Textarea placeholder="Please provide details about your project or inquiry..." {...field} rows={5} className="bg-input focus:bg-input/80" />
               </FormControl>
               <FormMessage />
             </FormItem>

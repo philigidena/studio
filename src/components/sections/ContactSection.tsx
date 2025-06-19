@@ -1,9 +1,39 @@
+"use client";
+import React, { useEffect, useRef } from 'react';
 import { InquiryForm } from './InquiryForm';
 import { SectionTitle } from '../shared/SectionTitle';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ContactSection = () => {
+  const formCardRef = useRef<HTMLDivElement>(null);
+  const infoCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const refs = [formCardRef.current, infoCardRef.current];
+    refs.forEach((ref, index) => {
+      if (ref) {
+        gsap.fromTo(ref,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 0.7, delay: index * 0.15, ease: 'power3.out',
+            scrollTrigger: {
+              trigger: ref,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            }
+          }
+        );
+      }
+    });
+  }, []);
+
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6 md:px-10">
@@ -12,7 +42,7 @@ const ContactSection = () => {
         </SectionTitle>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-start">
           <div className="lg:col-span-3">
-            <Card className="bg-card shadow-xl rounded-lg">
+            <Card ref={formCardRef} className="bg-card shadow-xl rounded-lg">
               <CardHeader>
                 <CardTitle className="text-2xl font-headline text-primary">Send Us a Message</CardTitle>
                 <CardDescription>Fill out the form and we'll get back to you promptly.</CardDescription>
@@ -24,7 +54,7 @@ const ContactSection = () => {
           </div>
           
           <div className="lg:col-span-2">
-            <Card className="bg-card shadow-xl rounded-lg">
+            <Card ref={infoCardRef} className="bg-card shadow-xl rounded-lg">
               <CardHeader>
                 <CardTitle className="text-2xl font-headline text-primary">Contact Information</CardTitle>
                 <CardDescription>You can also reach us directly:</CardDescription>
