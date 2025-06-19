@@ -12,7 +12,7 @@ const HeroSection = () => {
   const p2Ref = useRef<HTMLParagraphElement>(null);
   const btnGroupRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const openSashRef = useRef<SVGGElement>(null);
+  const openPaneGroupRef = useRef<SVGGElement>(null); // Changed ref name and type
 
 
   useEffect(() => {
@@ -21,32 +21,27 @@ const HeroSection = () => {
     if (svgRef.current) {
       tl.fromTo(svgRef.current, 
         { opacity: 0, scale: 0.8, y: 20 }, 
-        { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out' }, 
+        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 
         0.2
       );
     }
 
-    if (openSashRef.current) {
-      // Initial state before animation (matches the SVG's transform attribute)
-      // transform="translate(-115, 0) rotate(-25 110 125) scale(0.95)"
-      // We want to animate it to this resting position from a slightly more "closed" or "further back" state
-      gsap.set(openSashRef.current, { 
-        transformOrigin: "110px 125px", // Center of rotation based on SVG
-        rotation: -45, // Start more "closed"
-        scale: 0.9,
-        x: -130, // Start further translated
+    if (openPaneGroupRef.current) {
+      gsap.set(openPaneGroupRef.current, { 
+        rotationY: -75, // Start more "closed" or angled away
+        svgOrigin: "40px 125px", // GSAP specific transform origin for SVG (hinge point)
         opacity: 0,
+        scale: 0.9
       });
-      tl.to(openSashRef.current, 
+      tl.to(openPaneGroupRef.current, 
         { 
-          rotation: -25, // Target rotation from SVG
-          scale: 0.95,    // Target scale from SVG
-          x: -115,        // Target translate from SVG
+          rotationY: 5, // Target rotation: slightly ajar
           opacity: 1,
+          scale: 1,
           duration: 1.2, 
-          ease: 'elastic.out(1, 0.6)' 
+          ease: 'power3.out' 
         }, 
-        0.5 // Starts shortly after the main SVG container animation
+        0.4 // Starts shortly after the main SVG container animation
       );
     }
 
@@ -74,19 +69,19 @@ const HeroSection = () => {
               viewBox="0 0 250 250" 
               xmlns="http://www.w3.org/2000/svg" 
               aria-labelledby="heroWindowTitle" 
-              className="w-full h-auto drop-shadow-2xl"
+              className="w-full h-auto drop-shadow-xl" // Kept drop-shadow for depth
             >
-              <title id="heroWindowTitle">Stylized open window illustration</title>
+              <title id="heroWindowTitle">Modern stylized window illustration</title>
               <defs>
-                <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{stopColor: "hsl(0 0% 100% / 0.1)", stopOpacity: 0.1}} />
-                  <stop offset="100%" style={{stopColor: "hsl(0 0% 100% / 0.05)", stopOpacity: 0.05}} />
+                <linearGradient id="glassReflectionHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor: "hsl(var(--primary-foreground) / 0.1)"}} />
+                  <stop offset="100%" style={{stopColor: "hsl(var(--primary-foreground) / 0.02)"}} />
                 </linearGradient>
-                 <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                  <feOffset dx="2" dy="3" result="offsetblur"/>
+                 <filter id="subtleShadowHero" x="-10%" y="-10%" width="120%" height="120%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                  <feOffset dx="1" dy="2" result="offsetblur"/>
                   <feComponentTransfer>
-                    <feFuncA type="linear" slope="0.5"/>
+                    <feFuncA type="linear" slope="0.3"/>
                   </feComponentTransfer>
                   <feMerge> 
                     <feMergeNode/>
@@ -95,27 +90,36 @@ const HeroSection = () => {
                 </filter>
               </defs>
               
-              <g id="window-assembly" style={{ filter: "url(#dropShadow)" }}>
-                {/* Fixed part of the window frame (right side, representing the opening) */}
-                <g id="fixed-frame">
-                  <rect x="110" y="20" width="120" height="210" fill="hsl(var(--card) / 0.05)" stroke="hsl(var(--border))" strokeWidth="4" rx="5" />
-                  {/* Subtle hint of background through fixed opening */}
-                  <rect x="115" y="25" width="110" height="200" fill="hsl(var(--background)/0.05)" rx="3" />
+              <g filter="url(#subtleShadowHero)">
+                {/* Outer Frame */}
+                <rect x="20" y="20" width="210" height="210" rx="8" fill="hsl(var(--muted-foreground)/0.3)" stroke="hsl(var(--muted-foreground)/0.5)" strokeWidth="4" />
+                
+                {/* Inner "Glass Area" - represents the overall opening */}
+                <rect x="35" y="35" width="180" height="180" rx="4" fill="url(#glassReflectionHero)" />
+
+                {/* Group for the openable pane and its handle - this group is animated */}
+                <g ref={openPaneGroupRef}>
+                  <path
+                    d="M 40 40 H 120 V 210 H 40 Z" // Path for the pane
+                    fill="hsl(var(--primary-foreground)/0.15)"
+                    stroke="hsl(var(--primary-foreground)/0.7)"
+                    strokeWidth="3"
+                    // style={{ transformOrigin: "40px 125px" }} // GSAP handles origin
+                  />
+                  {/* Handle on this pane */}
+                  <rect
+                    x="110" // Position relative to the path's left edge (40) + desired offset
+                    y="115" // Vertical center of the handle on the pane
+                    width="6"
+                    height="20"
+                    rx="2"
+                    fill="hsl(var(--primary-foreground)/0.6)"
+                    // style={{ transformOrigin: "40px 125px" }} // GSAP handles origin for group
+                  />
                 </g>
 
-                {/* Central Mullion / Hinge Line */}
-                <line x1="110" y1="20" x2="110" y2="230" stroke="hsl(var(--card-foreground)/0.8)" strokeWidth="6" />
-
-                {/* Open Sash (left side, opens outwards) */}
-                <g ref={openSashRef} id="open-sash" transform="translate(-115, 0) rotate(-25 110 125) scale(0.95)">
-                  {/* Sash Frame */}
-                  <rect x="0" y="15" width="110" height="220" fill="hsl(var(--card))" stroke="hsl(var(--border))" strokeWidth="5" rx="6" />
-                  {/* Glass Pane */}
-                  <rect x="10" y="25" width="90" height="200" fill="url(#glassGradient)" stroke="hsl(var(--border)/0.5)" strokeWidth="1.5" rx="3" />
-                   {/* Handle on the sash */}
-                  <rect x="90" y="115" width="8" height="25" fill="hsl(var(--muted-foreground)/0.8)" rx="2" ry="2" />
-                  <circle cx="94" cy="120" r="3" fill="hsl(var(--muted-foreground)/0.6)" />
-                </g>
+                {/* Fixed pane or mullion to the right of the open one */}
+                <rect x="125" y="40" width="85" height="170" fill="hsl(var(--primary-foreground)/0.05)" stroke="hsl(var(--primary-foreground)/0.4)" strokeWidth="2" rx="2"/>
               </g>
             </svg>
           </div>
