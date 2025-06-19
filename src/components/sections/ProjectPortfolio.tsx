@@ -61,18 +61,18 @@ const ProjectPortfolio = () => {
 
   useEffect(() => {
     const cards = cardsContainerRef.current?.children;
-    if (cards) {
+    if (cards && cards.length > 0) { // Ensure cards exist
       gsap.fromTo(cards,
         { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          stagger: 0.15,
+          duration: 0.6, // Slightly longer duration for smoother feel
+          stagger: 0.15, // Adjusted stagger
           ease: 'power3.out',
           scrollTrigger: {
             trigger: cardsContainerRef.current,
-            start: "top 85%",
+            start: "top 85%", // Trigger when 85% of the container is visible
             toggleActions: "play none none none",
           }
         }

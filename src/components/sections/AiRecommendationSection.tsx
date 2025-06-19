@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -20,10 +21,18 @@ const AiRecommendationSection = () => {
   const [recommendation, setRecommendation] = useState<RecommendServiceOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  
+  const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const currentCardRef = cardRef.current;
+    const currentTextareaRef = textareaRef.current;
+    const currentButtonRef = buttonRef.current;
+    
     if (currentCardRef) {
       gsap.fromTo(currentCardRef,
         { opacity: 0, y: 50 },
@@ -33,11 +42,42 @@ const AiRecommendationSection = () => {
             trigger: currentCardRef,
             start: "top 85%",
             toggleActions: "play none none none",
+            onEnter: () => { // Animate inner elements when card is visible
+              if (currentTextareaRef) {
+                gsap.fromTo(currentTextareaRef,
+                  { opacity: 0, x: -30 },
+                  { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: 'power2.out' }
+                );
+              }
+              if (currentButtonRef) {
+                gsap.fromTo(currentButtonRef,
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0, duration: 0.6, delay: 0.35, ease: 'power2.out' }
+                );
+              }
+            }
           }
         }
       );
     }
   }, []);
+
+  useEffect(() => {
+    const currentResultRef = resultRef.current;
+    if (recommendation && currentResultRef && cardRef.current) {
+      // Ensure this animation plays when the recommendation appears
+      gsap.fromTo(currentResultRef,
+        { opacity: 0, y: 20 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.7, 
+          delay: 0.1, // Slight delay after state update
+          ease: 'power3.out' 
+        }
+      );
+    }
+  }, [recommendation]);
 
 
   const handleRecommend = async () => {
@@ -80,7 +120,7 @@ const AiRecommendationSection = () => {
   };
 
   return (
-    <section id="ai-recommendation" className="py-16 md:py-24 bg-secondary/30">
+    <section id="ai-recommendation" ref={sectionRef} className="py-16 md:py-24 bg-secondary/30">
       <div className="container mx-auto px-6 md:px-10">
         <SectionTitle subtitle="Not sure which service is right for you? Describe your project or needs, and our AI assistant will suggest the best Nanchang service.">
           AI Service Helper
@@ -97,6 +137,7 @@ const AiRecommendationSection = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
+              ref={textareaRef}
               placeholder="Enter your needs here..."
               value={needsDescription}
               onChange={(e) => setNeedsDescription(e.target.value)}
@@ -104,7 +145,7 @@ const AiRecommendationSection = () => {
               className="bg-input focus:bg-input/80 text-base"
               aria-label="Describe your aluminum needs"
             />
-            <Button onClick={handleRecommend} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-semibold">
+            <Button ref={buttonRef} onClick={handleRecommend} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-semibold">
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -117,7 +158,7 @@ const AiRecommendationSection = () => {
           </CardContent>
           
           {recommendation && (
-            <CardFooter className="flex flex-col items-start gap-4 p-6 border-t border-border mt-4">
+            <CardFooter ref={resultRef} className="flex flex-col items-start gap-4 p-6 border-t border-border mt-4">
               <h3 className="text-xl font-headline font-semibold text-primary">AI Recommendation:</h3>
               <div className="bg-primary/10 p-4 rounded-md w-full">
                 <p className="font-bold text-lg text-primary mb-1">{recommendation.recommendedService}</p>
