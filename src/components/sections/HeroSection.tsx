@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from 'next/image';
 import { gsap } from 'gsap';
 
 const HeroSection = () => {
@@ -11,8 +12,9 @@ const HeroSection = () => {
   const p1Ref = useRef<HTMLParagraphElement>(null);
   const p2Ref = useRef<HTMLParagraphElement>(null);
   const btnGroupRef = useRef<HTMLDivElement>(null);
+  const svgContainerRef = useRef<HTMLDivElement>(null); // Changed ref to target the container for hover
   const svgRef = useRef<SVGSVGElement>(null);
-  const openPaneGroupRef = useRef<SVGGElement>(null); // Changed ref name and type
+  const openPaneGroupRef = useRef<SVGGElement>(null);
 
 
   useEffect(() => {
@@ -26,23 +28,44 @@ const HeroSection = () => {
       );
     }
 
-    if (openPaneGroupRef.current) {
-      gsap.set(openPaneGroupRef.current, { 
-        rotationY: -75, // Start more "closed" or angled away
-        svgOrigin: "40px 125px", // GSAP specific transform origin for SVG (hinge point)
+    const openPaneElement = openPaneGroupRef.current;
+    if (openPaneElement) {
+      gsap.set(openPaneElement, { 
+        rotationY: -75, 
+        svgOrigin: "40px 125px", 
         opacity: 0,
         scale: 0.9
       });
-      tl.to(openPaneGroupRef.current, 
+      tl.to(openPaneElement, 
         { 
-          rotationY: 5, // Target rotation: slightly ajar
+          rotationY: 5, 
           opacity: 1,
           scale: 1,
           duration: 1.2, 
           ease: 'power3.out' 
         }, 
-        0.4 // Starts shortly after the main SVG container animation
+        0.4
       );
+
+      // Hover animation for the open pane
+      const svgContainerElement = svgContainerRef.current;
+      if (svgContainerElement) {
+        const hoverTl = gsap.timeline({ paused: true });
+        hoverTl.to(openPaneElement, {
+          rotationY: -35, // Opens further to the left
+          duration: 0.5,
+          ease: 'power2.out'
+        });
+
+        svgContainerElement.addEventListener('mouseenter', () => hoverTl.play());
+        svgContainerElement.addEventListener('mouseleave', () => hoverTl.reverse());
+
+        return () => {
+          svgContainerElement.removeEventListener('mouseenter', () => hoverTl.play());
+          svgContainerElement.removeEventListener('mouseleave', () => hoverTl.reverse());
+          hoverTl.kill();
+        };
+      }
     }
 
     if (headingRef.current) {
@@ -54,22 +77,33 @@ const HeroSection = () => {
     if (p2Ref.current) {
       tl.fromTo(p2Ref.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.6");
     }
-    if (btnGroupRef.current) {
-      tl.fromTo(btnGroupRef.current.children, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, stagger: 0.2 }, "-=0.5");
+    if (btnGroupRef.current?.children.length) { // Check if btnGroupRef.current has children
+        tl.fromTo(btnGroupRef.current.children, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, stagger: 0.2 }, "-=0.5");
     }
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-slate-800 text-primary-foreground py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-6 md:px-10">
+    <section ref={sectionRef} className="bg-slate-800 text-primary-foreground py-20 md:py-28 overflow-hidden relative">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://placehold.co/1920x1080.png"
+          alt="Faint background image"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-10"
+          data-ai-hint="abstract texture"
+          priority
+        />
+      </div>
+      <div className="container mx-auto px-6 md:px-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="w-full max-w-md mx-auto md:mx-0 md:order-1">
+          <div ref={svgContainerRef} className="w-full max-w-md mx-auto md:mx-0 md:order-1 cursor-pointer"> {/* Added cursor-pointer for hover indication */}
             <svg 
               ref={svgRef}
               viewBox="0 0 250 250" 
               xmlns="http://www.w3.org/2000/svg" 
               aria-labelledby="heroWindowTitle" 
-              className="w-full h-auto drop-shadow-xl" // Kept drop-shadow for depth
+              className="w-full h-auto drop-shadow-xl"
             >
               <title id="heroWindowTitle">Modern stylized window illustration</title>
               <defs>
@@ -100,21 +134,19 @@ const HeroSection = () => {
                 {/* Group for the openable pane and its handle - this group is animated */}
                 <g ref={openPaneGroupRef}>
                   <path
-                    d="M 40 40 H 120 V 210 H 40 Z" // Path for the pane
+                    d="M 40 40 H 120 V 210 H 40 Z" 
                     fill="hsl(var(--primary-foreground)/0.15)"
                     stroke="hsl(var(--primary-foreground)/0.7)"
                     strokeWidth="3"
-                    // style={{ transformOrigin: "40px 125px" }} // GSAP handles origin
                   />
                   {/* Handle on this pane */}
                   <rect
-                    x="110" // Position relative to the path's left edge (40) + desired offset
-                    y="115" // Vertical center of the handle on the pane
+                    x="110" 
+                    y="115" 
                     width="6"
                     height="20"
                     rx="2"
                     fill="hsl(var(--primary-foreground)/0.6)"
-                    // style={{ transformOrigin: "40px 125px" }} // GSAP handles origin for group
                   />
                 </g>
 
@@ -138,9 +170,6 @@ const HeroSection = () => {
             <div ref={btnGroupRef} className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-3 text-lg shadow-xl transform hover:scale-105 transition-transform duration-300 ease-out">
                 <Link href="#services">Explore Our Services</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-slate-800 font-semibold px-8 py-3 text-lg shadow-xl transform hover:scale-105 transition-transform duration-300 ease-out">
-                <Link href="#contact">Request a Quote</Link>
               </Button>
             </div>
           </div>
