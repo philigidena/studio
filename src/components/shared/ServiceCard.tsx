@@ -15,11 +15,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, imageUrl, descri
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (cardRef.current) {
-      const cardElement = cardRef.current;
-      // Ensure GSAP targets a specific element for animation if needed, or applies to the whole card.
-      // For simple hover, Tailwind transitions might be enough, but GSAP is requested.
-      
+    const cardElement = cardRef.current;
+    const imageElement = cardElement?.querySelector('img');
+
+    if (cardElement) {
       const tl = gsap.timeline({ paused: true });
 
       tl.to(cardElement, {
@@ -30,24 +29,31 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, imageUrl, descri
         ease: 'power2.out',
       });
 
+      if (imageElement) {
+        tl.to(imageElement, {
+          scale: 1.1, 
+          duration: 0.3,
+          ease: 'power2.out',
+        }, 0); 
+      }
+
       cardElement.addEventListener('mouseenter', () => tl.play());
       cardElement.addEventListener('mouseleave', () => tl.reverse());
 
       return () => {
-        // Safely remove event listeners
         if (cardElement) {
             cardElement.removeEventListener('mouseenter', () => tl.play());
             cardElement.removeEventListener('mouseleave', () => tl.reverse());
         }
-        tl.kill(); // Kill the timeline to free up resources
+        tl.kill(); 
       };
     }
   }, []);
 
   return (
-    <Card ref={cardRef} className="overflow-hidden bg-card hover:shadow-2xl rounded-lg h-full flex flex-col">
+    <Card ref={cardRef} className="overflow-hidden bg-card hover:shadow-2xl rounded-lg h-full flex flex-col group">
       <CardHeader className="p-0">
-        <div className="aspect-[16/10] relative w-full">
+        <div className="aspect-[16/10] relative w-full overflow-hidden rounded-t-lg">
           <Image
             src={imageUrl}
             alt={serviceName}
@@ -56,6 +62,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, imageUrl, descri
             data-ai-hint={imageHint}
             className="rounded-t-lg"
           />
+          <div className="absolute inset-0 bg-[hsl(var(--primary)/0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out rounded-t-lg pointer-events-none"></div>
         </div>
       </CardHeader>
       <CardContent className="p-6 flex-grow flex flex-col">
