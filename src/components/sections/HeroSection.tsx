@@ -34,7 +34,7 @@ const HeroSection = () => {
     <section ref={sectionRef} className="relative text-primary-foreground py-20 md:py-32 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://storage.googleapis.com/fab_ai_dev_images/97ef5390-596a-440b-9f4d-ed2ff95c079f.png" 
+          src="https://ekookna.co.uk/file/uploads/aktualnosci_2000_corredera.jpg" 
           alt="Modern aluminum sliding window and frame cross-section"
           layout="fill"
           objectFit="cover"
