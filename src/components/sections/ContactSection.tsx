@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef } from 'react';
 import { InquiryForm } from './InquiryForm';
@@ -66,11 +67,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg text-foreground">Phone</h4>
-                    <a href="tel:+251123456789" className="text-muted-foreground hover:text-accent transition-colors block">
-                      +251 123 456 789
-                    </a>
-                     <a href="tel:+251987654321" className="text-muted-foreground hover:text-accent transition-colors block">
-                      +251 987 654 321
+                    <a href="tel:+251907308888" className="text-muted-foreground hover:text-accent transition-colors block">
+                      +251 907 308 888
                     </a>
                   </div>
                 </div>
@@ -80,8 +78,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg text-foreground">Email</h4>
-                    <a href="mailto:info@nanchangethiopia.com" className="text-muted-foreground hover:text-accent transition-colors">
-                      info@nanchangethiopia.com
+                    <a href="mailto:nanchangmaterials@gmail.com" className="text-muted-foreground hover:text-accent transition-colors">
+                      nanchangmaterials@gmail.com
                     </a>
                      <p className="text-sm text-muted-foreground">We typically reply within 24 hours.</p>
                   </div>
@@ -92,7 +90,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg text-foreground">Office Address</h4>
-                    <p className="text-muted-foreground">123 Aluminum Street, Bole Sub-City, Addis Ababa, Ethiopia</p>
+                    <p className="text-muted-foreground">Nifas Silk Lafto Sub-city, Addis Ababa, Ethiopia</p>
                   </div>
                 </div>
                  <div className="flex items-start gap-4">

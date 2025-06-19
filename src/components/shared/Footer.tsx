@@ -1,3 +1,4 @@
+
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { Building2 } from 'lucide-react';
@@ -32,15 +33,15 @@ const Footer = () => {
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-accent" />
-              <a href="tel:+251123456789" className="hover:text-accent transition-colors">+251 123 456 789</a>
+              <a href="tel:+251907308888" className="hover:text-accent transition-colors">+251 907 308 888</a>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-accent" />
-              <a href="mailto:info@nanchangethiopia.com" className="hover:text-accent transition-colors">info@nanchangethiopia.com</a>
+              <a href="mailto:nanchangmaterials@gmail.com" className="hover:text-accent transition-colors">nanchangmaterials@gmail.com</a>
             </li>
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-accent mt-1" />
-              <span>123 Aluminum St, Bole, Addis Ababa, Ethiopia</span>
+              <span>Nifas Silk Lafto Sub-city, Addis Ababa, Ethiopia</span>
             </li>
           </ul>
         </div>

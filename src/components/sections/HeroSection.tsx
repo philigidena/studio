@@ -102,7 +102,7 @@ const HeroSection = () => {
     <section ref={sectionRef} className="bg-slate-800 text-primary-foreground py-20 md:py-28 overflow-hidden relative">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://placehold.co/1920x1080.png"
+          src="https://www.pfgglass.com/wp-content/uploads/2020/08/19951-80a-Street-Langley-Carsten-Arnold-Photography-44-1024x684.jpg"
           alt="Faint background image"
           layout="fill"
           objectFit="cover"
