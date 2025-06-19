@@ -33,6 +33,30 @@ const nextConfig: NextConfig = {
         hostname: 'premiumwindows.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.stockwindows.com.au',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.kanodwindows.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '5.imimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'innovativeofficepartitions.com.au',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
