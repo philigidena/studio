@@ -15,24 +15,60 @@ if (typeof window !== "undefined") {
 const ContactSection = () => {
   const formCardRef = useRef<HTMLDivElement>(null);
   const infoCardRef = useRef<HTMLDivElement>(null);
+  
+  const phoneIconRef = useRef<HTMLDivElement>(null);
+  const mailIconRef = useRef<HTMLDivElement>(null);
+  const mapIconRef = useRef<HTMLDivElement>(null);
+  const clockIconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const refs = [formCardRef.current, infoCardRef.current];
-    refs.forEach((ref, index) => {
-      if (ref) {
-        gsap.fromTo(ref,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1, y: 0, duration: 0.7, delay: index * 0.15, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: ref,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            }
+    const formEl = formCardRef.current;
+    const infoEl = infoCardRef.current;
+
+    if (formEl) {
+      gsap.fromTo(formEl,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: formEl,
+            start: "top 85%",
+            toggleActions: "play none none none",
           }
-        );
+        }
+      );
+    }
+    if (infoEl) {
+       gsap.fromTo(infoEl,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 0.7, delay: 0.15, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: infoEl,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          }
+        }
+      );
+    }
+
+    const iconRefs = [phoneIconRef.current, mailIconRef.current, mapIconRef.current, clockIconRef.current];
+    iconRefs.forEach((iconRef) => {
+      if (iconRef) {
+        const tl = gsap.timeline({ paused: true });
+        tl.to(iconRef, { scale: 1.15, y: -4, duration: 0.2, ease: 'power2.out' });
+
+        iconRef.addEventListener('mouseenter', () => tl.play());
+        iconRef.addEventListener('mouseleave', () => tl.reverse());
+        
+        return () => {
+          iconRef.removeEventListener('mouseenter', () => tl.play());
+          iconRef.removeEventListener('mouseleave', () => tl.reverse());
+          tl.kill();
+        };
       }
     });
+
   }, []);
 
   return (
@@ -61,8 +97,8 @@ const ContactSection = () => {
                 <CardDescription>You can also reach us directly:</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <div ref={phoneIconRef} className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0 cursor-pointer">
                     <Phone size={22} />
                   </div>
                   <div>
@@ -72,8 +108,8 @@ const ContactSection = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <div ref={mailIconRef} className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0 cursor-pointer">
                     <Mail size={22} />
                   </div>
                   <div>
@@ -84,8 +120,8 @@ const ContactSection = () => {
                      <p className="text-sm text-muted-foreground">We typically reply within 24 hours.</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0">
+                <div className="flex items-start gap-4 group">
+                  <div ref={mapIconRef} className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0 cursor-pointer">
                     <MapPin size={22} />
                   </div>
                   <div>
@@ -93,8 +129,8 @@ const ContactSection = () => {
                     <p className="text-muted-foreground">Nifas Silk Lafto Sub-city, Addis Ababa, Ethiopia</p>
                   </div>
                 </div>
-                 <div className="flex items-start gap-4">
-                  <div className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0">
+                 <div className="flex items-start gap-4 group">
+                  <div ref={clockIconRef} className="bg-primary text-primary-foreground p-3 rounded-full flex-shrink-0 cursor-pointer">
                     <Clock size={22} />
                   </div>
                   <div>

@@ -21,7 +21,7 @@ const HeroSection = () => {
     
     const svgElement = svgRef.current;
     const openPaneElement = openPaneGroupRef.current;
-    const svgWrapperElement = svgContainerRef.current; // The div that will get the hover listeners
+    const svgWrapperElement = svgContainerRef.current; 
 
     let hoverTl: gsap.core.Timeline | null = null;
 
@@ -33,14 +33,12 @@ const HeroSection = () => {
     };
 
     if (svgElement && openPaneElement) {
-      // Initial animation for the SVG itself
       tl.fromTo(svgElement, 
         { opacity: 0, scale: 0.8, y: 20 }, 
         { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 
         0.2 
       );
     
-      // Initial animation for the openable pane
       gsap.set(openPaneElement, { 
         rotationY: -75, 
         svgOrigin: "120px 125px", 
@@ -58,11 +56,10 @@ const HeroSection = () => {
         0.4
       );
 
-      // Hover animation for the open pane
       if (svgWrapperElement) {
         hoverTl = gsap.timeline({ paused: true });
         hoverTl.to(openPaneElement, {
-          rotationY: 45, // Corrected: Opens further to the left
+          rotationY: 45, 
           duration: 0.5,
           ease: 'power2.out'
         });
@@ -72,7 +69,6 @@ const HeroSection = () => {
       }
     }
 
-    // Text and button animations
     if (headingRef.current) {
       tl.fromTo(headingRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }, 0.4);
     }
@@ -141,13 +137,8 @@ const HeroSection = () => {
               </defs>
               
               <g filter="url(#subtleShadowHero)">
-                {/* Outer Frame */}
                 <rect x="20" y="20" width="210" height="210" rx="8" fill="hsl(var(--muted-foreground)/0.3)" stroke="hsl(var(--muted-foreground)/0.5)" strokeWidth="4" />
-                
-                {/* Inner "Glass Area" - represents the overall opening */}
                 <rect x="35" y="35" width="180" height="180" rx="4" fill="url(#glassReflectionHero)" />
-
-                {/* Group for the openable pane and its handle - this group is animated */}
                 <g ref={openPaneGroupRef}>
                   <path
                     d="M 40 40 H 120 V 210 H 40 Z" 
@@ -155,7 +146,6 @@ const HeroSection = () => {
                     stroke="hsl(var(--primary-foreground)/0.7)"
                     strokeWidth="3"
                   />
-                  {/* Handle on this pane */}
                   <rect
                     x="110" 
                     y="115" 
@@ -165,15 +155,13 @@ const HeroSection = () => {
                     fill="hsl(var(--primary-foreground)/0.6)"
                   />
                 </g>
-
-                {/* Fixed pane or mullion to the right of the open one */}
                 <rect x="125" y="40" width="85" height="170" fill="hsl(var(--primary-foreground)/0.05)" stroke="hsl(var(--primary-foreground)/0.4)" strokeWidth="2" rx="2"/>
               </g>
             </svg>
           </div>
 
           <div className="text-center md:text-left md:order-2">
-            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl font-headline font-extrabold mb-4">
+            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl font-headline font-extrabold mb-4 text-primary">
               Nanchang Ethiopia
             </h1>
             <p ref={p1Ref} className="text-xl md:text-2xl mb-3 font-semibold text-primary-foreground/90">
@@ -196,4 +184,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
