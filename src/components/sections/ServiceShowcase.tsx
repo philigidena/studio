@@ -16,7 +16,7 @@ const services = [
     id: '1',
     serviceName: 'Sliding Windows',
     description: 'Modern and space-saving sliding windows, offering smooth operation and panoramic views for any property.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://premiumwindows.com/wp-content/uploads/2020/03/TimelessW-Horizontal_sliding-Front-2.jpg',
     imageHint: 'sliding window modern',
   },
   {
