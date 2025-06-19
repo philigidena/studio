@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef } from 'react';
 import ProjectCard from '../shared/ProjectCard';
@@ -82,7 +83,7 @@ const ProjectPortfolio = () => {
   return (
     <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-secondary/20">
       <div className="container mx-auto px-6 md:px-10">
-        <SectionTitle subtitle="Browse through some of our successfully completed aluminum projects, showcasing our commitment to quality, precision, and innovative design.">
+        <SectionTitle subtitle="Witness our dedication to excellence. Explore a curated selection of Nanchang's completed projects, demonstrating our mastery in aluminum fabrication, meticulous installation, and innovative design solutions across diverse commercial and residential applications.">
           Our Portfolio
         </SectionTitle>
         <div ref={cardsContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

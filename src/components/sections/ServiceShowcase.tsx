@@ -89,7 +89,7 @@ const ServiceShowcase = () => {
   return (
     <section id="services" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6 md:px-10">
-        <SectionTitle subtitle="Explore our wide range of aluminum solutions designed for durability, style, and performance.">
+        <SectionTitle subtitle="Discover Nanchang's comprehensive suite of aluminum products, expertly crafted for superior durability, modern aesthetics, and unmatched performance. From elegant windows and doors to robust curtain walls and bespoke sunrooms, we have the perfect solution for your project.">
           Our Services
         </SectionTitle>
         <Carousel
@@ -99,7 +99,7 @@ const ServiceShowcase = () => {
           }}
           plugins={[
             Autoplay({
-              delay: 3000, // Changed from 4000ms to 3000ms for a faster pace
+              delay: 3000,
               stopOnInteraction: true,
               stopOnMouseEnter: true,
             })
