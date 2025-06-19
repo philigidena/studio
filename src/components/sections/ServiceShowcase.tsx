@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef } from 'react';
 import ServiceCard from '../shared/ServiceCard';
@@ -12,45 +13,73 @@ if (typeof window !== "undefined") {
 const services = [
   {
     id: '1',
-    serviceName: 'Aluminum Windows',
-    description: 'High-quality, durable aluminum windows for modern residential and commercial buildings, offering excellent insulation and aesthetic appeal.',
+    serviceName: 'Sliding Windows',
+    description: 'Modern and space-saving sliding windows, offering smooth operation and panoramic views for any property.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'aluminum window',
+    imageHint: 'sliding window',
   },
   {
     id: '2',
-    serviceName: 'Aluminum Doors',
-    description: 'Secure and stylish aluminum doors available in various designs, perfect for main entrances, patios, and internal use.',
+    serviceName: 'Sliding Doors',
+    description: 'Elegant sliding doors that seamlessly connect indoor and outdoor spaces, enhancing light and accessibility.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'aluminum door',
+    imageHint: 'sliding door',
   },
   {
     id: '3',
-    serviceName: 'Curtain Walling Systems',
-    description: 'Elegant and robust curtain wall systems that provide a modern facade for buildings, maximizing natural light.',
+    serviceName: 'Casement Windows',
+    description: 'Versatile casement windows offering excellent ventilation and security, available in various styles.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'curtain wall',
+    imageHint: 'casement window',
   },
   {
     id: '4',
-    serviceName: 'Custom Aluminum Fabrication',
-    description: 'Bespoke aluminum fabrication services tailored to unique architectural requirements, including decorative panels and structures.',
+    serviceName: 'Casement Doors',
+    description: 'Durable and stylish casement doors providing robust performance and a classic look for entrances and patios.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'aluminum fabrication',
+    imageHint: 'casement door',
   },
   {
     id: '5',
-    serviceName: 'Shop Fronts & Entrances',
-    description: 'Attractive and durable aluminum shop fronts and commercial entrances designed to enhance your business visibility.',
+    serviceName: 'Office Partitions',
+    description: 'Customizable aluminum and glass office partitions to create modern, functional, and flexible workspaces.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'shop front',
+    imageHint: 'office partition',
   },
   {
     id: '6',
-    serviceName: 'Aluminum Railings & Balustrades',
-    description: 'Safe and stylish aluminum railings and balustrades for balconies, stairs, and terraces, offering modern design and low maintenance.',
+    serviceName: 'Floor Spring Doors',
+    description: 'Sleek glass doors with floor spring mechanisms for a minimalist aesthetic and smooth, controlled movement.',
     imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'aluminum railing',
+    imageHint: 'glass door',
+  },
+  {
+    id: '7',
+    serviceName: 'Glass Curtain Walls',
+    description: 'Sophisticated glass curtain wall systems for striking building facades that maximize natural light and energy efficiency.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'glass facade',
+  },
+  {
+    id: '8',
+    serviceName: 'Sunrooms',
+    description: 'Beautifully crafted aluminum sunrooms and conservatories, extending your living space with light and comfort.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'glass sunroom',
+  },
+  {
+    id: '9',
+    serviceName: 'Hanging Rail Doors',
+    description: 'Contemporary hanging rail doors (barn doors) that offer a unique design element and save space.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'hanging door',
+  },
+  {
+    id: '10',
+    serviceName: 'Stair Handrails',
+    description: 'Secure and elegant aluminum stair handrails, combining safety with modern design for staircases.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'stair railing',
   },
 ];
 
