@@ -12,27 +12,38 @@ const HeroSection = () => {
   const p1Ref = useRef<HTMLParagraphElement>(null);
   const p2Ref = useRef<HTMLParagraphElement>(null);
   const btnGroupRef = useRef<HTMLDivElement>(null);
-  const svgContainerRef = useRef<HTMLDivElement>(null); // Changed ref to target the container for hover
+  const svgContainerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const openPaneGroupRef = useRef<SVGGElement>(null);
-
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
-    if (svgRef.current) {
-      tl.fromTo(svgRef.current, 
+    const svgElement = svgRef.current;
+    const openPaneElement = openPaneGroupRef.current;
+    const svgWrapperElement = svgContainerRef.current; // The div that will get the hover listeners
+
+    let hoverTl: gsap.core.Timeline | null = null;
+
+    const handleMouseEnter = () => {
+        if (hoverTl) hoverTl.play();
+    };
+    const handleMouseLeave = () => {
+        if (hoverTl) hoverTl.reverse();
+    };
+
+    if (svgElement && openPaneElement) {
+      // Initial animation for the SVG itself
+      tl.fromTo(svgElement, 
         { opacity: 0, scale: 0.8, y: 20 }, 
         { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 
-        0.2
+        0.2 
       );
-    }
-
-    const openPaneElement = openPaneGroupRef.current;
-    if (openPaneElement) {
+    
+      // Initial animation for the openable pane
       gsap.set(openPaneElement, { 
         rotationY: -75, 
-        svgOrigin: "40px 125px", 
+        svgOrigin: "120px 125px", 
         opacity: 0,
         scale: 0.9
       });
@@ -48,26 +59,20 @@ const HeroSection = () => {
       );
 
       // Hover animation for the open pane
-      const svgContainerElement = svgContainerRef.current;
-      if (svgContainerElement) {
-        const hoverTl = gsap.timeline({ paused: true });
+      if (svgWrapperElement) {
+        hoverTl = gsap.timeline({ paused: true });
         hoverTl.to(openPaneElement, {
-          rotationY: -35, // Opens further to the left
+          rotationY: 45, // Corrected: Opens further to the left
           duration: 0.5,
           ease: 'power2.out'
         });
 
-        svgContainerElement.addEventListener('mouseenter', () => hoverTl.play());
-        svgContainerElement.addEventListener('mouseleave', () => hoverTl.reverse());
-
-        return () => {
-          svgContainerElement.removeEventListener('mouseenter', () => hoverTl.play());
-          svgContainerElement.removeEventListener('mouseleave', () => hoverTl.reverse());
-          hoverTl.kill();
-        };
+        svgWrapperElement.addEventListener('mouseenter', handleMouseEnter);
+        svgWrapperElement.addEventListener('mouseleave', handleMouseLeave);
       }
     }
 
+    // Text and button animations
     if (headingRef.current) {
       tl.fromTo(headingRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }, 0.4);
     }
@@ -77,9 +82,20 @@ const HeroSection = () => {
     if (p2Ref.current) {
       tl.fromTo(p2Ref.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.6");
     }
-    if (btnGroupRef.current?.children.length) { // Check if btnGroupRef.current has children
+    if (btnGroupRef.current?.children.length) {
         tl.fromTo(btnGroupRef.current.children, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, stagger: 0.2 }, "-=0.5");
     }
+
+    return () => {
+      tl.kill();
+      if (svgWrapperElement) {
+        svgWrapperElement.removeEventListener('mouseenter', handleMouseEnter);
+        svgWrapperElement.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      if (hoverTl) {
+        hoverTl.kill();
+      }
+    };
   }, []);
 
   return (
@@ -97,7 +113,7 @@ const HeroSection = () => {
       </div>
       <div className="container mx-auto px-6 md:px-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div ref={svgContainerRef} className="w-full max-w-md mx-auto md:mx-0 md:order-1 cursor-pointer"> {/* Added cursor-pointer for hover indication */}
+          <div ref={svgContainerRef} className="w-full max-w-md mx-auto md:mx-0 md:order-1 cursor-pointer">
             <svg 
               ref={svgRef}
               viewBox="0 0 250 250" 
@@ -180,3 +196,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
